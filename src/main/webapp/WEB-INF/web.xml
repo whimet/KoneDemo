@@ -5,7 +5,7 @@
 
     <servlet>
         <servlet-name>play_video_servlet</servlet-name>
-        <servlet-class>demo.PlayVideoServlet</servlet-class>
+        <servlet-class>demo.web.PlayVideoServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -15,7 +15,7 @@
 
     <servlet>
         <servlet-name>play_slides_servlet</servlet-name>
-        <servlet-class>demo.PlaySlidesServlet</servlet-class>
+        <servlet-class>demo.web.PlaySlidesServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>

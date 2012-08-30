@@ -1,8 +1,6 @@
 package demo;
 
-import org.mortbay.jetty.Handler;
 import org.mortbay.jetty.Server;
-import org.mortbay.jetty.handler.HandlerList;
 import org.mortbay.jetty.webapp.WebAppContext;
 
 public class JettyServer {

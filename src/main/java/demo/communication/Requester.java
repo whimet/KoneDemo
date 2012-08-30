@@ -1,4 +1,4 @@
-package demo;
+package demo.communication;
 
 import java.io.*;
 import java.net.*;
