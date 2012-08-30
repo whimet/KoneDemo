@@ -6,8 +6,8 @@ repositories {
     mavenCentral()
 }
 
-configurations {
-    jetty
+war {
+    baseName = 'kone'
 }
 
 dependencies {

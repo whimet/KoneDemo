@@ -8,6 +8,7 @@ import org.junit.Test;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 import static org.junit.internal.matchers.IsCollectionContaining.hasItem;
 
@@ -26,8 +27,11 @@ public class UDPServerTest {
         UDPClient client = new UDPClient("localhost", 3456);
         client.connect();
         client.sendMessage("hello UDP");
+        client.sendMessage("hello UDP2");
         client.disconnect();
 
+        assertThat(strings.size(), is(2));
         assertThat(strings, hasItem("hello UDP"));
+        assertThat(strings, hasItem("hello UDP2"));
     }
 }
