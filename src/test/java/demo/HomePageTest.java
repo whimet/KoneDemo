@@ -17,7 +17,7 @@ public class HomePageTest {
     @Before
     public void setUp() throws Exception {
         driver = new HtmlUnitDriver(false);
-        driver.get("http://localhost:8080/kone");
+        driver.get("http://localhost:8090/kone");
     }
 
     @Test
