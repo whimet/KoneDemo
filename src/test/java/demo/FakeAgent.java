@@ -17,7 +17,7 @@ public class FakeAgent {
             public void run() {
                 ping();
             }
-        }, 20 * 1000);
+        }, 10 * 1000);
 
         new UDPServer(4567, new UDPListener() {
             @Override

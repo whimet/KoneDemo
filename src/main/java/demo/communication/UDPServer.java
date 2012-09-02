@@ -67,6 +67,10 @@ public class UDPServer {
         serverSocket.close();
     }
 
+    public InetAddress getLastClientAddress() {
+        return lastClientAddress;
+    }
+
     public static void main(String args[]) throws Exception {
         DatagramSocket serverSocket = new DatagramSocket(3456);
         byte[] receiveData = new byte[1024];

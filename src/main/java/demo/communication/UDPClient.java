@@ -9,9 +9,14 @@ public class UDPClient {
     private InetAddress server;
 
     public UDPClient(String server, int port) throws UnknownHostException {
-        this.server = InetAddress.getByName(server);
+        this(InetAddress.getByName(server), port);
+    }
+
+    public UDPClient(InetAddress server, int port) {
+        this.server = server;
         this.port = port;
     }
+
 
     public void connect() throws SocketException {
         socket = new DatagramSocket();
