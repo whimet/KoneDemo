@@ -4,12 +4,12 @@ import java.io.*;
 import java.net.*;
 
 public class UDPClient {
-    private String server;
     private int port;
     private DatagramSocket socket;
+    private InetAddress server;
 
-    public UDPClient(String server, int port) {
-        this.server = server;
+    public UDPClient(String server, int port) throws UnknownHostException {
+        this.server = InetAddress.getByName(server);
         this.port = port;
     }
 
@@ -17,15 +17,21 @@ public class UDPClient {
         socket = new DatagramSocket();
     }
 
-    public void sendMessage(String message) throws IOException {
-        InetAddress IPAddress = InetAddress.getByName(server);
+    public void send(String message) throws IOException {
         byte[] sendData = message.getBytes("UTF-8");
-        DatagramPacket packet = new DatagramPacket(sendData, sendData.length, IPAddress, port);
+        DatagramPacket packet = new DatagramPacket(sendData, sendData.length, server, port);
         socket.send(packet);
     }
 
     public void disconnect() {
         socket.close();
+    }
+
+    public String receive() throws IOException {
+        byte[] receiveData = new byte[1024];
+        DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);
+        socket.receive(receivePacket);
+        return Utils.extractMessage(receivePacket);
     }
 
     public static void main(String args[]) throws Exception {

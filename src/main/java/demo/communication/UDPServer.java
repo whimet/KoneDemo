@@ -1,19 +1,26 @@
 package demo.communication;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.*;
 
 public class UDPServer {
     private int port;
-    private UdpListener[] listeners;
+    private UDPListener[] listeners;
+    private DatagramSocket serverSocket;
+    private InetAddress lastClientAddress;
+    private int lastClientPort;
+    private Thread thread;
 
-    public UDPServer(int port, UdpListener... listeners) {
+    public UDPServer(int port, UDPListener... listeners) {
         this.port = port;
         this.listeners = listeners;
     }
 
     public void start() throws IOException {
-        Thread thread = new Thread(new Runnable() {
+        serverSocket = new DatagramSocket(port);
+
+        thread = new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
@@ -28,20 +35,36 @@ public class UDPServer {
     }
 
     private void loop() throws IOException {
-        DatagramSocket serverSocket = new DatagramSocket(port);
-        byte[] receiveData = new byte[1024];
         while (true) {
+            byte[] receiveData = new byte[1024];
             DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);
             serverSocket.receive(receivePacket);
-            byte[] data = receivePacket.getData();
-            byte[] buf = new byte[receivePacket.getLength()];
-            System.arraycopy(data, receivePacket.getOffset(), buf, 0, receivePacket.getLength());
-            String message = new String(buf, "UTF-8");
-            for (int i = 0; i < listeners.length; i++) {
-                UdpListener listener = listeners[i];
+
+            lastClientAddress = receivePacket.getAddress();
+            lastClientPort = receivePacket.getPort();
+
+            String message = Utils.extractMessage(receivePacket);
+            for (UDPListener listener : listeners) {
                 listener.onMessage(message);
             }
         }
+    }
+
+    public void reply(String message) throws IOException {
+        if(lastClientAddress == null) throw new IllegalStateException("Unknown destination");
+        
+        try {
+            byte[] sendData = message.getBytes("UTF-8");
+            DatagramPacket packet = new DatagramPacket(sendData, sendData.length, lastClientAddress, lastClientPort);
+            serverSocket.send(packet);
+        } catch (UnsupportedEncodingException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void stop() throws InterruptedException {
+        thread.stop();
+        serverSocket.close();
     }
 
     public static void main(String args[]) throws Exception {

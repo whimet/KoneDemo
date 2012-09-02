@@ -1,5 +1,5 @@
 package demo.communication;
 
-public interface UdpListener {
+public interface UDPListener {
     void onMessage(String message);
 }
