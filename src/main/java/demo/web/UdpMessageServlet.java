@@ -23,6 +23,6 @@ public class UDPMessageServlet extends HttpServlet {
     }
 
     private int getClientPort() {
-        return Integer.parseInt(System.getProperty("client.port", "4567"));
+        return Integer.parseInt(System.getProperty("client.port", "9009"));
     }
 }

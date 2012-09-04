@@ -1,6 +1,7 @@
 package demo;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -10,6 +11,7 @@ import static junit.framework.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 import static org.junit.internal.matchers.StringContains.containsString;
 
+@Ignore
 public class HomePageTest {
 
     private HtmlUnitDriver driver;
