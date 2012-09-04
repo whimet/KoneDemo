@@ -8,6 +8,16 @@
     </listener>
 
     <servlet>
+        <servlet-name>index_servlet</servlet-name>
+        <servlet-class>demo.web.IndexServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>index_servlet</servlet-name>
+        <url-pattern>/index.html</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>play_video_servlet</servlet-name>
         <servlet-class>demo.web.PlayVideoServlet</servlet-class>
     </servlet>
