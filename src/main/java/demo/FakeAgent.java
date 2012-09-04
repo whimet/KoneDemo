@@ -19,13 +19,13 @@ public class FakeAgent {
             }
         }, 0, 4 * 1000);
 
-        new UDPServer(4567, new UDPListener() {
+        new UDPServer(9009, new UDPListener() {
             @Override
             public void onMessage(String message) {
                 System.out.println("Received message: " + message);
             }
         }).start();
-        System.out.println("Listening server-to-agent message at port 4567...");
+        System.out.println("Listening server-to-agent message at port 9009...");
     }
 
     private static void ping() {

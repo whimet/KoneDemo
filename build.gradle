@@ -6,18 +6,8 @@ repositories {
     mavenCentral()
 }
 
-war {
-    baseName = 'kone'
-    manifest {
-        attributes 'Main-Class': 'demo.JettyServer',
-                'Class-Path': 'WEB-INF/classes WEB-INF/lib/jetty-6.1.26.jar'
-    }
-    from sourceSets.main.output.classesDir
-    into '.'
-}
-
-task foo<< {
-    println sourceSets.main.output.asPath
+configurations {
+    jetty
 }
 
 dependencies {
@@ -26,6 +16,22 @@ dependencies {
     compile 'commons-io:commons-io:1.4'
     testCompile group: 'junit', name: 'junit', version: '4.10'
     testCompile 'net.sourceforge.htmlunit:webdriver:2.6'
+    jetty 'org.mortbay.jetty:jetty:6.1.26'
+}
+
+war {
+    baseName = 'kone'
+    manifest {
+        attributes 'Main-Class': 'demo.JettyServer'
+    }
+    configurations.jetty.each { from zipTree(it) }
+    exclude 'META-INF/MANIFEST.MF'
+    from sourceSets.main.output.classesDir
+    into ''
+}
+
+task foo<< {
+     configurations.jetty.each {println it}
 }
 
 task jetty << {
