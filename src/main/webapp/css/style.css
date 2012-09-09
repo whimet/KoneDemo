@@ -11,6 +11,7 @@ a.button {background:#363636; font-size:14px; line-height:20px; color:#fff; disp
 a.button:hover {background:#FFA500}
 
 a.link {text-decoration:none; cursor:pointer; color:#44a7bb}
+.Inactive {color:#FFA500}
 a.link:hover {text-decoration:underline}
 
 .color-1 {color:#fff}
