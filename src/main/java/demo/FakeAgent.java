@@ -10,6 +10,8 @@ import java.util.TimerTask;
 
 public class FakeAgent {
 
+    private static final String SERVER = "localhost";
+
     public static void main(String[] args) throws IOException {
         Timer timer = new Timer();
         timer.schedule(new TimerTask() {
@@ -30,7 +32,7 @@ public class FakeAgent {
 
     private static void ping() {
         try {
-            UDPClient client = new UDPClient("localhost", 9090);
+            UDPClient client = new UDPClient(SERVER, 9090);
             client.connect();
             client.send("ping");
             client.disconnect();
