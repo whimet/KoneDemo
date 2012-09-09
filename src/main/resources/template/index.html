@@ -3,7 +3,7 @@
 <head>
     <title>Services</title>
     <meta charset="utf-8">
-    <meta http-equiv="refresh" content="3">
+    <!--<meta http-equiv="refresh" content="3">-->
     <link rel="stylesheet" type="text/css" media="screen" href="css/reset.css">
     <link rel="stylesheet" type="text/css" media="screen" href="css/style.css">
     <link rel="stylesheet" type="text/css" media="screen" href="css/grid_12.css">
@@ -49,12 +49,18 @@
                     	<li>KONE demo #1</li>
                      </ul>
                 </div>
-                <div class="block-6" style="width: 580px; height: 157px">
+                <div class="block-6" style="width: 580px; height: 197px">
 					<p><br/></p>
 					<p><br/></p>
 					<p><a href="#" class="link"><strong>Status: <span>$STATUS$</span></strong></a></p>
                     <p>IP: <span>$IP$</span></p>
                     <p class="p0">Last Ping: <span>$PING$</span></p>
+
+        			<form action="demo/send_command" method="post">
+                        <input type="text" id="command" name="command" maxlength="255"/>
+            			<button id="send_command" type="submit">Send Command</button>
+        			</form>
+
                     <form action="demo/play_video" method="post">
             			<button id="play_video" type="submit">Play Video</button>
         			</form>

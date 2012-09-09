@@ -18,6 +18,16 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>send_command_servlet</servlet-name>
+        <servlet-class>demo.web.SendCommandServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>send_command_servlet</servlet-name>
+        <url-pattern>/demo/send_command</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>play_video_servlet</servlet-name>
         <servlet-class>demo.web.PlayVideoServlet</servlet-class>
     </servlet>
